@@ -2,7 +2,7 @@
 <html lang="th">
 <head>
   <meta charset="utf-8">
-  <title>Win Counter Control</title>
+  <title>Win Count</title>
   <style>
     @font-face {
       font-family: 'FC Minimal';
@@ -12,7 +12,7 @@
     }
     html, body {
       margin: 0; padding: 0;
-      background: #181c23;
+      background: #181818;
       color: #fff;
       font-family: 'FC Minimal', Arial, sans-serif;
       width: 100vw; height: 100vh;
@@ -25,13 +25,12 @@
       display: block;
       position: relative;
     }
-    /* ---- titlebar overlay ---- */
     .titlebar-flawless {
       position: absolute;
       left: 0; top: 0;
       width: 100vw;
       height: 32px;
-      background: #23232b;
+      background: #181818;
       display: flex; align-items: center; justify-content: space-between;
       -webkit-app-region: drag;
       user-select: none;
@@ -40,23 +39,14 @@
       box-sizing: border-box;
     }
     .logo-label {
-      display: flex; align-items: center; gap: 8px;
+      display: flex; align-items: center;
       margin-left: 10px;
     }
     .logo-label img {
-      width: 15px; height: 15px; border-radius: 3px;
+      width: 17px; height: 17px; border-radius: 3px;
       background: #181c23;
       box-shadow: 0 1px 2px #0003;
       display: block;
-    }
-    .logo-label .label {
-      font-size: 13px;
-      font-weight: 400;
-      color: #eaeaea;
-      white-space: nowrap;
-      -webkit-app-region: no-drag;
-      font-family: 'FC Minimal', Arial, sans-serif;
-      opacity: 0.82;
     }
     .windowbtns {
       display: flex; flex-direction: row; gap: 0;
@@ -69,7 +59,7 @@
       width: 28px; height: 28px;
       display: flex; align-items: center; justify-content: center;
       border: none; outline: none;
-      background: #23232b;
+      background: #181818;
       cursor: pointer;
       border-radius: 5px;
       margin: 0 1px;
@@ -91,9 +81,8 @@
     .windowbtn#close-btn:hover svg { stroke: #fff; }
     .windowbtn#min-btn:hover { background: #353a3e; }
     .windowbtn#min-btn:active { background: #27292c; }
-    /* ---- END titlebar overlay ---- */
 
-    /* ---- UI ของอาร์ตเดิม (fix spacing) ---- */
+    /* UI อาร์ตเดิม */
     .center-content {
       width: 100vw;
       min-width: 0;
@@ -102,24 +91,24 @@
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
-      gap: 0;                /* สำคัญ! ให้ gap = 0 */
+      gap: 0;
       position: relative;
       z-index: 2;
-      padding-top: 32px;
+      padding-top: 41px;
     }
     .win-box {
       display: flex;
       flex-direction: column;
       align-items: center;
       width: 100%;
-      margin-bottom: 24px; /* ระยะห่างกล่องเลขกับปุ่มรีเซ็ต */
+      margin-bottom: 24px;
     }
     #winval {
       font-family: 'FC Minimal', Arial, sans-serif;
       font-weight: 700;
       font-size: 56px;
-      width: 130px;
-      max-width: 190px;
+      width: 110px;
+      max-width: 170px;
       height: 68px;
       text-align: center;
       border-radius: 15px;
@@ -159,17 +148,17 @@
     input::-webkit-outer-spin-button, input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
     .btn-reset {
       font-family: 'FC Minimal', Arial, sans-serif;
-      font-size: 28px;
+      font-size: 48px;
       font-weight: 700;
-      background: #ff3333;
+      background: #c80000;
       color: #fff;
       border: none;
       outline: none;
       border-radius: 20px;
       min-width: 0;
-      width: 160px;
+      width: 120px;
       height: 54px;
-      margin: 0 0 8px 0;        /* ใส่ margin-bottom: 8px; */
+      margin: 0 0 8px 0;
       cursor: pointer;
       box-shadow: 0 1.5px 10px #0002;
       transition: background .12s;
@@ -178,20 +167,20 @@
       -webkit-app-region: no-drag;
       user-select: none;
     }
-    .btn-reset:hover { background: #c80000; }
+    .btn-reset:hover { background: #ff3333; }
     .btn-copy {
       font-family: 'FC Minimal', Arial, sans-serif;
-      font-size: 22px;
+      font-size: 27px;
       font-weight: 700;
-      background: #fff;
-      color: #181818;
+      background: #2e2e2e;
+      color: #ffffff;
       border: none;
       outline: none;
       border-radius: 20px;
       min-width: 0;
-      width: 144px;
+      width: 120px;
       height: 54px;
-      margin: 0;               /* สำคัญ! ไม่มี margin-top */
+      margin: 0;
       cursor: pointer;
       box-shadow: 0 1.5px 10px #0001;
       transition: background .12s, color .12s;
@@ -200,14 +189,14 @@
       -webkit-app-region: no-drag;
       user-select: none;
     }
-    .btn-copy:hover { background: #f7f7f7; }
+    .btn-copy:hover { background: #414141; }
   </style>
 </head>
 <body>
   <!-- titlebar overlay -->
   <div class="titlebar-flawless">
     <div class="logo-label">
-      <img src="LOGO.ico" width="20" height="20" alt="logo" />
+      <img src="LOGO.ico" width="17" height="17" alt="logo" />
     </div>
     <div class="windowbtns">
       <button class="windowbtn" id="min-btn" title="ย่อหน้าต่าง" tabindex="-1">
@@ -221,7 +210,6 @@
       </button>
     </div>
   </div>
-  <!-- **** UI อาร์ตเดิม ไม่เปลี่ยน **** -->
   <div class="center-content">
     <div class="win-box">
       <input id="winval" type="text" value="0" autocomplete="off" spellcheck="false" inputmode="numeric" />
@@ -255,7 +243,7 @@
     function animateWinval() {
       const el = document.getElementById('winval');
       el.classList.remove('animated');
-      void el.offsetWidth; // force reflow
+      void el.offsetWidth;
       el.classList.add('animated');
       el.addEventListener('animationend', () => {
         el.classList.remove('animated');
@@ -284,9 +272,7 @@
       try { return fs.readFileSync(winPath, 'utf8').trim(); } catch { return "0"; }
     }
     const winvalInput = document.getElementById('winval');
-    winvalInput.addEventListener('focus', ()=>{
-      setTimeout(()=>winvalInput.select(), 10);
-    });
+    winvalInput.addEventListener('focus', ()=>{ setTimeout(()=>winvalInput.select(), 10); });
     winvalInput.addEventListener('keydown', (e) => {
       const v = winvalInput.value;
       if (e.key === "-" && v === "0") {
@@ -300,33 +286,20 @@
         e.preventDefault();
       }
     });
-    winvalInput.addEventListener('input', ()=>{
-      let val = winvalInput.value;
-      if (!/^(-?\d*)$/.test(val)) return;
-      writeWin(val);
-    });
-    winvalInput.addEventListener('change', ()=>{
-      let val = winvalInput.value;
-      writeWin(val);
-    });
-    winvalInput.addEventListener('keyup', (e)=>{
-      if(e.key === 'Enter'){
-        let val = winvalInput.value;
-        writeWin(val);
-        winvalInput.select();
-      }
-    });
-    document.getElementById('btn-reset').onclick = () => { writeWin("0"); ipcRenderer.send('reset-win'); };
+    winvalInput.addEventListener('input', ()=>{ let val = winvalInput.value; if (!/^(-?\d*)$/.test(val)) return; writeWin(val); });
+    winvalInput.addEventListener('change', ()=>{ let val = winvalInput.value; writeWin(val); });
+    winvalInput.addEventListener('keyup', (e)=>{ if(e.key === 'Enter'){ let val = winvalInput.value; writeWin(val); winvalInput.select(); } });
+    document.getElementById('btn-reset').onclick = () => { writeWin("0"); ipcRenderer && ipcRenderer.send('reset-win'); };
     document.getElementById('btn-copy').onclick = () => {
-      clipboard.writeText('http://localhost:3000/overlay.html');
+      clipboard && clipboard.writeText('http://localhost:3000/overlay.html');
     };
     setInterval(syncInput, 120);
     syncInput();
-    // ปุ่ม – / X (overlay flawless)
+
+    // ปุ่ม Title Bar: ใช้ ipcRenderer เท่านั้น
     document.getElementById('min-btn').onclick = (e) => {
       e.preventDefault(); e.stopPropagation();
-      const r = require('electron').remote || require('@electron/remote');
-      r.getCurrentWindow().minimize();
+      ipcRenderer.send('window-minimize');
       return false;
     };
     document.getElementById('close-btn').onclick = (e) => {

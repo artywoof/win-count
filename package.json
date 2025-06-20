@@ -1,5 +1,5 @@
 {
-  "name": "win_count",
+  "name": "win-count",
   "version": "1.0.0",
   "description": "โปรแกรมนับวินสำหรับสตรีมเมอร์ TikTok",
   "author": "Art",
@@ -10,7 +10,7 @@
   },
   "build": {
     "appId": "com.yourdomain.win_count",
-    "productName": "Win Counter",
+    "productName": "Win Count",
     "copyright": "Copyright © Art",
     "files": [
       "main.js",

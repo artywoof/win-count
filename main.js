@@ -82,6 +82,9 @@ app.whenReady().then(() => {
   ipcMain.on('hide-control', () => {
     controlWin.hide();
   });
+  ipcMain.on('window-minimize', () => {
+  if (controlWin && !controlWin.isMinimized()) controlWin.minimize();
+  });
   ipcMain.on('set-win', (_e, v) => setWin(Number(v)));
   ipcMain.on('reset-win', () => setWin(0));
 });
