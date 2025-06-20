@@ -15,7 +15,7 @@
       overflow: hidden;
     }
     body {
-      min-width: 616px; min-height: 445px;
+      min-width: 520px; min-height: 435px;
       width: 100vw; height: 100vh;
       display: flex; flex-direction: column;
       align-items: stretch; justify-content: flex-start;
@@ -88,15 +88,16 @@
     .windowbtn#min-btn svg {
       stroke: #fff;
     }
-    .bottom-content {
+    /* =============== เน้น UI กลางจอ! =============== */
+    .center-content {
       flex: 1 1 0;
       width: 100%;
-      min-width: 616px; min-height: 413px;
+      min-width: 420px;
+      min-height: 340px;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: flex-end;
-      padding-bottom: 38px;
+      align-items: center;        /* Center แนวนอน */
+      justify-content: center;    /* Center แนวตั้ง */
       gap: 32px;
     }
     .win-box {
@@ -107,7 +108,7 @@
       margin-top: 0;
       width: 100%;
     }
-    /* กล่องเลข overlay style เป๊ะ */
+    /* กล่องเลข overlay style + effect + ขนาด -999 */
     #winval {
       font-family: 'Manrope', 'FC Minimal', Arial, sans-serif;
       font-weight: 800;
@@ -233,7 +234,7 @@
       </button>
     </div>
   </div>
-  <div class="bottom-content">
+  <div class="center-content">
     <div class="win-box">
       <input id="winval" type="text" value="0" autocomplete="off" spellcheck="false" inputmode="numeric" />
     </div>
