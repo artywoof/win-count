@@ -23,8 +23,8 @@ function setWin(v) {
 
 function createControlWindow() {
   controlWin = new BrowserWindow({
-    width: 320,
-    height: 340,
+    width: 240,
+    height: 310,
     resizable: false,
     maximizable: false,
     minimizable: true,
