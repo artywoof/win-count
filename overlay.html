@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <title>Overlay Number Sleek Button 3D</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@800&display=swap" rel="stylesheet">
+  <style>
+    html, body {
+      background: transparent;
+      width: 100vw; height: 100vh;
+      margin: 0; padding: 0; user-select: none; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .main-box {
+      background: linear-gradient(163deg, #26242b 72%, #18171c 100%);
+      border-radius: 15px;
+      padding: 14px 18px 14px 14px;
+      display: flex; align-items: center; gap: 10px;
+      min-width: 0;
+      border: 1.9px solid #ededf4;
+      box-shadow:
+        0 6px 20px 0 #0007,
+        0 1.2px 0 0 #fff2 inset,
+        0 -1.7px 7px #1b1b1e33 inset;
+      position: relative;
+      overflow: visible;
+    }
+    #skull {
+      font-size: 62px;
+      margin-left: 2px;
+      margin-right: 8px;
+      user-select: none;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1.1;
+      filter: none;
+      text-shadow: 0 1.5px 7px #0002;
+    }
+    #value {
+      font-family: 'Manrope', 'Leelawadee UI', Arial, sans-serif;
+      font-weight: 800;
+      font-size: 62px;
+      width: 130px;
+      max-width: 190px;
+      height: 68px;
+      text-align: center;
+      border-radius: 15px;
+      background: 
+        linear-gradient(160deg, #383846 88%, #232127 100%),
+        linear-gradient(0deg, #ffffff18 12%, #fff0 35%, #fff0 100%);
+      color: #f84949;
+      padding: 4px 0px;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow:
+        0 3.8px 14px #0007,
+        0 1.5px 0 #fff6 inset,
+        0 1.2px 6px #d6ebff44 inset,
+        0 -5px 13px #1c1c2177 inset,
+        0 -1px 0 #232127bb inset,
+        0 0.5px 1.2px #fff6 inset;
+      transition: color 0.15s, background 0.15s, width 0.22s cubic-bezier(0.4,2,0.5,1), height 0.15s;
+      line-height: 1.03;
+      border: 2.1px solid #f2f2f4;
+      letter-spacing: 2.2px;
+      box-sizing: border-box;
+      overflow: hidden;
+      position: relative;
+      z-index: 10;
+    }
+    #value.positive { color: #1ebd37; background: linear-gradient(160deg, #d3fbe3 90%, #eaffea 100%);}
+    #value.zero { color: #d8b400; background: linear-gradient(160deg, #faf5c8 90%, #fffbe7 100%);}
+    #value.negative { color: #f84949; background: linear-gradient(160deg, #383846 88%, #232127 100%);}
+    #value.expand { width: 190px; }
+    @keyframes pop {
+      0% { transform: scale(1);}
+      40% { transform: scale(1.12);}
+      100% { transform: scale(1);}
+    }
+    .animate { animation: pop 0.19s cubic-bezier(0.4,2,0.5,1) 1; }
+  </style>
+</head>
+<body>
+  <div class="main-box">
+    <span id="skull">💀</span>
+    <span id="value" class="negative">0</span>
+  </div>
+  <audio id="plus" src="win_plus.mp3" preload="auto"></audio>
+  <audio id="minus" src="win_minus.mp3" preload="auto"></audio>
+  <script>
+    let lastValue = null;
+    function playAudio(id) {
+      const src = document.getElementById(id).src;
+      const a = new Audio(src);
+      a.volume = 0.92;
+      a.play();
+      a.addEventListener('ended', () => a.remove());
+    }
+    async function fetchWin() {
+      try {
+        const resp = await fetch('win_state.txt?' + Date.now());
+        if(resp.ok) {
+          let txt = resp.text ? await resp.text() : '';
+          txt = txt.trim();
+          const numElem = document.getElementById('value');
+          let valNum = Number(txt);
+          numElem.classList.remove('expand');
+          if (!isNaN(valNum) && Math.abs(valNum) >= 100) {
+            numElem.classList.add('expand');
+          }
+          if (txt !== lastValue && lastValue !== null) {
+            numElem.classList.remove('animate');
+            void numElem.offsetWidth;
+            numElem.classList.add('animate');
+            let before = Number(lastValue), now = Number(txt);
+            if (!isNaN(before) && !isNaN(now)) {
+              if(now > before) playAudio('plus');
+              else if(now < before) playAudio('minus');
+            }
+          }
+          numElem.classList.remove('positive','zero','negative');
+          if (!isNaN(valNum)) {
+            if(valNum > 0) numElem.classList.add('positive');
+            else if(valNum === 0) numElem.classList.add('zero');
+            else numElem.classList.add('negative');
+          }
+          numElem.innerText = txt;
+          lastValue = txt;
+        }
+      } catch(e){}
+    }
+    function superLoop() {
+      fetchWin();
+      setTimeout(superLoop, 16);
+    }
+    superLoop();
+    document.getElementById('value').addEventListener('animationend', function() {
+      this.classList.remove('animate');
+    });
+  </script>
+</body>
+</html>

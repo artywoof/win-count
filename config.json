@@ -1,0 +1,10 @@
+{
+  "hotkeys": {
+    "add_1": ["alt+="],
+    "sub_1": ["alt+-"],
+    "add_10": ["shift+alt+="],
+    "sub_10": ["shift+alt+-"],
+    "reset": ["alt+0"]
+  },
+  "tray_icon": "LOGO.ico"
+}

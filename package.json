@@ -1,0 +1,37 @@
+{
+  "name": "win_count",
+  "version": "1.0.0",
+  "description": "โปรแกรมนับวินสำหรับสตรีมเมอร์ TikTok",
+  "author": "Art",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder --win --x64"
+  },
+  "build": {
+    "appId": "com.yourdomain.win_count",
+    "productName": "Win Counter",
+    "copyright": "Copyright © Art",
+    "files": [
+      "main.js",
+      "control.html",
+      "overlay.html",
+      "win_state.txt",
+      "LOGO.ico"
+    ],
+    "win": {
+      "icon": "LOGO.ico",
+      "target": [
+        "nsis"
+      ]
+    }
+  },
+  "devDependencies": {
+    "electron": "^25.0.0",
+    "electron-builder": "^24.0.0"
+  },
+  "dependencies": {
+    "@electron/remote": "^2.1.2",
+    "express": "^5.1.0"
+  }
+}
