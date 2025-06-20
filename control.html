@@ -9,7 +9,7 @@
       margin: 0; padding: 0;
       background: #181c23;
       color: #fff;
-      font-family: 'Manrope', 'FC Minimal', Arial, sans-serif;
+      font-family: 'Manrope', Arial, sans-serif;
       width: 100vw; height: 100vh;
       box-sizing: border-box;
       overflow: hidden;
@@ -18,7 +18,6 @@
       min-width: 520px; min-height: 435px;
       width: 100vw; height: 100vh;
       display: flex; flex-direction: column;
-      align-items: stretch; justify-content: flex-start;
     }
     .titlebar {
       width: 100%; height: 32px;
@@ -27,7 +26,7 @@
       -webkit-app-region: drag;
       user-select: none;
       position: relative;
-      z-index: 2;
+      z-index: 99;
     }
     .logo-label {
       display: flex; align-items: center; gap: 8px;
@@ -42,13 +41,12 @@
     }
     .logo-label .label {
       font-size: 18px;
-      font-weight: 500;
-      color: #f5f5f5;
+      font-weight: 800;
+      color: #fff;
       letter-spacing: 0.3px;
-      text-shadow: 0 1px 3px #0001;
       white-space: nowrap;
       -webkit-app-region: no-drag;
-      font-family: 'Manrope', 'FC Minimal', Arial, sans-serif;
+      font-family: 'Manrope', Arial, sans-serif;
       margin-bottom: 1px;
     }
     .windowbtns {
@@ -56,6 +54,7 @@
       margin-right: 2px;
       height: 100%;
       -webkit-app-region: no-drag;
+      z-index: 100;
     }
     .windowbtn {
       width: 32px; height: 28px;
@@ -75,30 +74,23 @@
       transition: stroke .13s;
       pointer-events: none;
     }
-    .windowbtn#min-btn:hover {
-      background: #363644;
-    }
-    .windowbtn#close-btn:hover {
-      background: #e81123;
-    }
-    .windowbtn#close-btn:active {
-      background: #c50f1f;
-    }
-    .windowbtn#close-btn svg,
-    .windowbtn#min-btn svg {
-      stroke: #fff;
-    }
-    /* =============== เน้น UI กลางจอ! =============== */
+    .windowbtn#min-btn:hover { background: #363644; }
+    .windowbtn#close-btn:hover { background: #e81123; }
+    .windowbtn#close-btn:active { background: #c50f1f; }
+    .windowbtn#close-btn svg, .windowbtn#min-btn svg { stroke: #fff; }
+    /* เน้น UI กลางจอ! */
     .center-content {
       flex: 1 1 0;
       width: 100%;
-      min-width: 420px;
-      min-height: 340px;
       display: flex;
       flex-direction: column;
-      align-items: center;        /* Center แนวนอน */
-      justify-content: center;    /* Center แนวตั้ง */
+      align-items: center;
+      justify-content: center; /* Center ทั้งแนวตั้งและแนวนอน */
       gap: 32px;
+      min-height: 0;
+      min-width: 0;
+      position: relative;
+      z-index: 2;
     }
     .win-box {
       display: flex;
@@ -108,9 +100,8 @@
       margin-top: 0;
       width: 100%;
     }
-    /* กล่องเลข overlay style + effect + ขนาด -999 */
     #winval {
-      font-family: 'Manrope', 'FC Minimal', Arial, sans-serif;
+      font-family: 'Manrope', Arial, sans-serif;
       font-weight: 800;
       font-size: 62px;
       width: 130px;
@@ -141,18 +132,9 @@
       margin-top: 0;
       display: block;
     }
-    #winval.plus {
-      color: #1ebd37;
-      background: linear-gradient(160deg, #d3fbe3 90%, #eaffea 100%);
-    }
-    #winval.zero {
-      color: #d8b400;
-      background: linear-gradient(160deg, #faf5c8 90%, #fffbe7 100%);
-    }
-    #winval.minus {
-      color: #f84949;
-      background: linear-gradient(160deg, #383846 88%, #232127 100%);
-    }
+    #winval.plus { color: #1ebd37; background: linear-gradient(160deg, #d3fbe3 90%, #eaffea 100%); }
+    #winval.zero { color: #d8b400; background: linear-gradient(160deg, #faf5c8 90%, #fffbe7 100%); }
+    #winval.minus { color: #f84949; background: linear-gradient(160deg, #383846 88%, #232127 100%); }
     #winval.expand { width: 190px !important; }
     @keyframes pop {
       0% { transform: scale(1);}
@@ -162,8 +144,8 @@
     #winval.animated { animation: pop 0.19s cubic-bezier(0.4,2,0.5,1) 1; }
     input::-webkit-outer-spin-button, input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
     .btn-reset {
-      font-family: 'Manrope', 'FC Minimal', Arial, sans-serif;
-      font-size: 55px;
+      font-family: 'Manrope', Arial, sans-serif;
+      font-size: 38px;
       font-weight: 800;
       background: #ff3333;
       color: #fff;
@@ -171,22 +153,22 @@
       outline: none;
       border-radius: 24px;
       min-width: 0;
-      width: auto;
-      height: 92px;
+      width: 230px;
+      height: 70px;
       margin: 0;
       margin-bottom: 0;
       cursor: pointer;
       box-shadow: 0 1.5px 10px #0002;
       transition: background .12s;
       display: flex; align-items: center; justify-content: center;
-      padding: 0 52px;
+      padding: 0 24px;
       -webkit-app-region: no-drag;
       user-select: none;
     }
     .btn-reset:hover { background: #c80000; }
     .btn-copy {
-      font-family: 'Manrope', 'FC Minimal', Arial, sans-serif;
-      font-size: 47px;
+      font-family: 'Manrope', Arial, sans-serif;
+      font-size: 32px;
       font-weight: 800;
       background: #fff;
       color: #181818;
@@ -194,22 +176,22 @@
       outline: none;
       border-radius: 24px;
       min-width: 0;
-      width: auto;
-      height: 92px;
+      width: 230px;
+      height: 70px;
       margin-top: 0;
       cursor: pointer;
       box-shadow: 0 1.5px 10px #0001;
       transition: background .12s, color .12s;
       display: flex; align-items: center; justify-content: center;
-      padding: 0 52px;
+      padding: 0 24px;
       -webkit-app-region: no-drag;
       user-select: none;
     }
     .btn-copy:hover { background: #f7f7f7; }
     #copymsg {
-      color: #36f17a; font-size: 26px; margin-top: 13px; min-height: 18px; text-align: center;
+      color: #36f17a; font-size: 22px; margin-top: 13px; min-height: 18px; text-align: center;
       font-weight: 800; letter-spacing: 0.08px;
-      font-family: 'Manrope', 'FC Minimal', Arial, sans-serif;
+      font-family: 'Manrope', Arial, sans-serif;
       user-select: none;
     }
   </style>
@@ -252,10 +234,7 @@
     function updateWinvalColor(val) {
       const el = document.getElementById('winval');
       el.classList.remove('plus', 'zero', 'minus', 'expand');
-      // ขยายถ้าเกิน 3 หลัก
-      if (val.replace('-', '').length >= 3) {
-        el.classList.add('expand');
-      }
+      if (val.replace('-', '').length >= 3) el.classList.add('expand');
       const num = Number(val);
       if (val === "-") {
         el.classList.add('minus');
@@ -281,44 +260,35 @@
     function writeWin(val) {
       if (typeof val !== "string") val = String(val);
       val = val.trim();
-
       if (val === "") val = "0";
       if (val === "-0") val = "0";
       if (!/^(-?\d*)$/.test(val)) return;
-
       fs.writeFileSync(winPath, val);
       document.getElementById('winval').value = val;
       updateWinvalColor(val);
-
-      // animate ถ้าเลขเปลี่ยนจริง
       if (lastValue !== null && val !== lastValue) animateWinval();
       lastValue = val;
     }
-
     function syncInput() {
       let v = readWin();
       document.getElementById('winval').value = v;
       updateWinvalColor(v);
       lastValue = v;
     }
-
     function readWin() {
       try { return fs.readFileSync(winPath, 'utf8').trim(); } catch { return "0"; }
     }
-
     const winvalInput = document.getElementById('winval');
     winvalInput.addEventListener('focus', ()=>{
       setTimeout(()=>winvalInput.select(), 10);
     });
     winvalInput.addEventListener('keydown', (e) => {
       const v = winvalInput.value;
-      // ถ้าค่าเป็น "0" แล้วกด -, กลายเป็น "-"
       if (e.key === "-" && v === "0") {
         winvalInput.value = "-";
         writeWin("-");
         e.preventDefault();
       }
-      // ถ้าค่าเป็น "0" แล้วกดเลข 1-9 แทนที่ด้วยเลขใหม่
       if (v === "0" && /^[1-9]$/.test(e.key)) {
         winvalInput.value = e.key;
         writeWin(e.key);
